@@ -5,19 +5,23 @@ import { CreatePersonDto } from "./create-person.dto";
 import { InsertResult } from "typeorm";
 import { GetPersonDto } from "./get-person.dto";
 import * as bcrypt from "bcrypt";
-import { Result } from "../result";
+import { Result, ResultWithValue } from "../result";
 
 @Injectable()
 export class PersonService {
 
   constructor(private readonly dataSource: DataSource) {}
 
-    async findByUsername(username: string): Promise<GetPersonDto> {
+    async findByUsername(username: string): Promise<ResultWithValue<GetPersonDto>> {
         var person = await this.dataSource
             .getRepository(Person)
             .findOne({ where: { username } });
 
-        return new GetPersonDto(person);
+        if (!person) {
+            return ResultWithValue.fail("Person not found");
+        }
+
+        return ResultWithValue.ok(new GetPersonDto(person));
     }
 
     async create(personToCreate: CreatePersonDto): Promise<InsertResult> {

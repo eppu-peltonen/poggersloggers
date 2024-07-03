@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { User } from "./user.entity";
 import { DataSource } from "typeorm";
-import { CreateUserDto } from "./create-user-dto";
-import { GetUserDto } from "./get-user-dto";
+import { CreateUserDto } from "../dto/create-user-dto";
+import { GetUserDto } from "../dto/get-user-dto";
 import * as bcrypt from "bcrypt";
 import { Result, ResultWithValue } from "../result";
 

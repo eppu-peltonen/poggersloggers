@@ -1,5 +1,5 @@
 
-import { Module } from "@nestjs/common";
+import { Module, SetMetadata } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
 import { UsersModule } from "../users/users.module";
@@ -13,7 +13,7 @@ import { ConfigService, ConfigModule } from "@nestjs/config";
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
                 secret: configService.get('JWT_SECRET'),
-                signOptions: { expiresIn: '60s' },
+                signOptions: { expiresIn: 3600},
                 global: true,
             }),
             inject: [ConfigService],

@@ -3,11 +3,11 @@ import { ResultHelper } from "./utils/result-helper";
 import { HttpStatus } from "@nestjs/common";
 
 export class Result {
-    public _error: string = '';
+    public _error: string = "";
     public success: boolean = false;
     public failure: boolean = false;
     public status: HttpStatus = HttpStatus.OK
-    public info: string = '';
+    public info: string = "";
 
     constructor() {}
 

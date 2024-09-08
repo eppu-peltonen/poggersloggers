@@ -2,21 +2,33 @@
 
 This is a backend project for PoggersLoggers exercise service.
 
-## Install
+Postgres database and adminer database management tool are running in containers using docker compose.
 
-This is a multi-container application built with docker compose. Project can be ran with VS Code dev containers or just using docker compose. With dev containers you can develop inside the api container and live reload.
-
-### Prerequisites
+## Prerequisites
 
 - Docker
 - node
-- VS Code and Dev containers extension (optional)
 
-### With VS Code and Dev Containers
+## Install
 
-1. Run VS Code command `Dev Containers: Reopen in container`
-2. From the container run the nestjs application with `npm run dev`
+1. Add .env file to backend root directory with following template
 
-### With docker compose only
+        API_PORT=<port number for backend api>
 
-1. `docker-compose up --build`
+        DB_PORT=<database container inbound and outbound port number>
+
+        DB_USERNAME=<database username>
+
+        DB_PASSWORD=<database password>
+
+        DATABASE=<database name>
+
+        ADMINER_PORT=<adminer container inbound and outbound port number>
+
+2. Then run from the backend root directory:
+
+    1. `docker-compose up` to build and start the containers
+
+    2. `npm install` to install the dependencies
+
+    3. `npm run dev` to start the nestjs server in development mode

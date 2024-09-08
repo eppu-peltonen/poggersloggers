@@ -1,10 +1,12 @@
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - ${API_PORT}:${API_PORT}
     volumes:
-      - ./backend:/app
+      - app:/app
     depends_on:
       db:
         condition: service_healthy
@@ -24,7 +26,12 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
   adminer:
     image: adminer
     ports:
       - ${ADMINER_PORT}:${ADMINER_PORT}
+volumes:
+  app:
+  postgres-data:

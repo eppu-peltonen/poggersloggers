@@ -19,11 +19,11 @@ import { JwtModule } from "@nestjs/jwt";
             inject: [ConfigService],
             useFactory: (configService: ConfigService) => ({
                 type: "postgres",
-                host: "db",
-                port: +configService.get("DB_PORT"),
-                username: configService.get("DB_USERNAME"),
-                password: configService.get("DB_PASSWORD"),
-                database: configService.get("DATABASE"),
+                host: configService.get<string>("DB_HOST"),
+                port: +configService.get<number>("DB_PORT"),
+                username: configService.get<string>("DB_USERNAME"),
+                password: configService.get<string>("DB_PASSWORD"),
+                database: configService.get<string>("DATABASE"),
                 autoLoadEntities: true,
                 synchronize: true,
                 entities: [join(__dirname, "**", "*.entity.{ts,js}")]

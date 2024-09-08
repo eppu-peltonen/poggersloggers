@@ -1,12 +1,15 @@
+import { PartialType } from "@nestjs/mapped-types";
 import { User } from "../users/user.entity"
+import { UserDto } from "./user-dto";
 
-export class GetUserDto {
-
-    constructor(user: User) {
-        this.username = user.username;
-        this.createdAt = user.createdAt;
-    }
+export class GetUserDto extends PartialType(UserDto) {
 
     username: string;
     createdAt: Date;
+
+    constructor(user: User) {
+        super();
+        this.username = user.username;
+        this.createdAt = user.createdAt;
+    }
 }

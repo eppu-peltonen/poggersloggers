@@ -1,9 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { User } from "./user.entity";
+import { User } from "./users.entity";
 import { DataSource } from "typeorm";
 import { CreateUserDto } from "../dto/create-user-dto";
 import { GetUserDto } from "../dto/get-user-dto";
 import * as bcrypt from "bcrypt";
+import { ApiResponse } from "src/interfaces";
 
 @Injectable()
 export class UsersService {
@@ -34,7 +35,7 @@ export class UsersService {
         return user;
     }
 
-    async create(userToCreate: CreateUserDto): Promise<void> {
+    async create(userToCreate: CreateUserDto): Promise<ApiResponse> {
 
         var user = await this.dataSource
             .getRepository(User)
@@ -61,6 +62,11 @@ export class UsersService {
             throw new HttpException("User not created", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return;
+        var response: ApiResponse = {
+            code: HttpStatus.CREATED,
+            description: "User created",
+        };
+
+        return response;
     }
 }

@@ -15,6 +15,8 @@ Postgres database and adminer database management tool are running in containers
 
         API_PORT=<port number for backend api>
 
+        JWT_SECRET=<jwt secret>
+
         DB_PORT=<database container inbound and outbound port number>
 
         DB_USERNAME=<database username>

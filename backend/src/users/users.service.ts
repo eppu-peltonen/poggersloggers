@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { User } from "./users.entity";
 import { DataSource } from "typeorm";
-import { CreateUserDto } from "../dto/create-user-dto";
-import { GetUserDto } from "../dto/get-user-dto";
+import { CreateUserDto } from "./dto/create-user-dto";
+import { GetUserDto } from "./dto/get-user-dto";
 import * as bcrypt from "bcrypt";
 import { ApiResponse } from "src/interfaces";
 

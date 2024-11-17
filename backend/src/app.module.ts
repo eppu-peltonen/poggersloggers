@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { AppController } from "./app/app.controller";
 import { AppService } from "./app/app.service"
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -43,4 +43,10 @@ import { PolarModule } from './polar/polar.module';
     providers: [AppService],
 })
 
-export class AppModule {}
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer
+            .apply()
+            .forRoutes("*");
+    }
+}

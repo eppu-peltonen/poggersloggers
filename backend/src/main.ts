@@ -26,6 +26,8 @@ async function bootstrap() {
 
   const port = app.get(ConfigService).get<number>("API_PORT");
 
+  app.enableCors();
+
   await app.listen(port);
 }
 

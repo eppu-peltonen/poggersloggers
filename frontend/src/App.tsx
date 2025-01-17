@@ -1,27 +1,20 @@
-import * as React from "react"
-import { getHello } from "./services/hello"
-import { useQuery } from "@tanstack/react-query"
-import Header from "./components/Header"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./components/Layout"
+import {Bryitt} from "./components/Bryitt"
+import {routes} from "./routes"
 
-const App = () => {
-
-    const {isPending, error, data, isFetching} = useQuery({
-        queryKey: ["hello"],
-        queryFn: getHello,
-    });
-
-        if (isPending) return <div>Loading...</div>;
-        if (error) return <div>Error: {error.message}</div>;
+export const App = () => {
 
     return (
-        <div>
-            <Header />
-            <div className="container mx-auto p-4 bg-slate-200 shadow-lg rounded-lg">
-                {data.message}
-                <div>{isFetching ? "Fetching..." : ""}</div>
-            </div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route element={<Layout />}>
+                    <Route index element={<Bryitt />} />
+                    {routes.map((route, index) => (
+                        <Route key={index} path={route.url} element={route.component} />
+                    ))}
+                </Route>
+            </Routes>
+        </BrowserRouter>
     )
 }
-
-export default App
